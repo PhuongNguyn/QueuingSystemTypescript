@@ -1,0 +1,52 @@
+.user-diary__input{
+    margin-top: 104px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-diary{
+    padding-right: 105px;
+}
+
+.user-diary-input__keyword{
+    position: relative;
+}
+
+.user-diary-input__keyword p{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+    text-align: start;
+}
+
+.user-diary-input__keyword input{
+    width: 240px;
+    height: 44px;
+    padding: 10px 45px 10px 12px;
+    gap: 10px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #A9A9B0;
+    outline: none;
+}
+
+.user-diary-input__keyword--search-icon{
+    color:#FF7506;
+    position: absolute;
+    top: 35px;
+    right: 15px;
+}
+
+.user-diary-input__table{
+    margin-top: 16px;
+}
+
+.user-diary-divide-page{
+    margin-right: 0;
+}

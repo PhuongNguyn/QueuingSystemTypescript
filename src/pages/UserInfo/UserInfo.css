@@ -1,0 +1,127 @@
+.user-info-card{
+    width: 1112px;
+    height: 397px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 6px rgba(219, 219, 219, 0.5);
+    border-radius: 12px;
+    margin-left: 24px;
+    margin-top: 168px;
+}
+
+.user-info-card__avatar--avatar-circle{
+    width: 248px;
+    height: 248px;
+    border-radius: 318px;
+    position: relative;
+}
+
+.user-info-card{
+    padding-top: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+}
+
+.user-info-card__avatar--camera{
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    background: #FF7506;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 175px;    
+    top: 200px;
+    border: 2px solid #FFFFFF;
+}
+
+.user-info-card__avatar--name p{
+    width: 190px;
+    height: 36px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: #282739;
+    margin-top: 19px;
+    margin-left: 25px;
+}
+
+.user-info-card{
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-info-card-column2__input-name p{
+    width: 112px;
+    height: 24px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+}
+
+.user-info-card-column2__input-name input, .user-info-card-column2__input-phone input, .user-info-card-comlumn2__input-email input,
+.user-info-card-column1__input-account input, .user-info-card-column1__input-password input, .user-info-card-comlumn1__input-role input{
+    padding: 12px 16px;
+    width: 384px;
+    height: 44px;
+    background: #EAEAEC;
+    border-radius: 6px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    color: #a8a8af;
+    margin-top: 8px;
+}
+
+.user-info-card-column2__input-phone, .user-info-card-comlumn2__input-email, .user-info-card-column1__input-password,.user-info-card-comlumn1__input-role{
+    margin-top: 20px;
+}
+
+.user-info-card-column2__input-phone p{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    width: 95px;
+    height: 24px;
+    color: #282739;
+}
+
+.user-info-card-comlumn2__input-email p{
+    width: 44px;
+    height: 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+}
+
+.user-info-card-column1__input-account p{
+    width: 108px;
+    height: 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+}
+
+.user-info-card-column1__input-password p{
+    width: 68px;
+    height: 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+}
+
+.user-info-card-comlumn1__input-role {
+    width: 52px;
+    height: 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+}

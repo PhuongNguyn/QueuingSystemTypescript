@@ -1,0 +1,87 @@
+.edit-service__input{
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+}
+
+.edit-service__box{
+    width: 1192px!important;
+}
+
+
+.edit-service-input__service-code p, .edit-service-input__service-name p, .edit-service-input__service-description p{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;
+    color: #282739;
+}
+
+.edit-service-input__service-name {
+    margin-top: 12px;
+}
+
+.edit-service-input__service-code input, .edit-service-input__service-name input, .edit-service-input__service-description input{
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    width: 540px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #535261;
+    box-sizing: border-box;
+    margin-top: 4px;
+    outline: none;
+}
+
+.edit-service-input__service-description textarea{
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    width: 540px;
+    height: 128px;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #535261;
+    box-sizing: border-box;
+    margin-top: 4px;
+    outline: none;
+}
+
+.edit-service__number--title{
+    margin-top: 12px;
+}
+
+.edit-service-number-rule__input--from-to p, .edit-service-number-rule__input--prefix p, .edit-service-number-rule__input--reset p{
+    color: #282739;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;
+}
+
+.edit-service-number-rule__input--from-to , .edit-service-number-rule__input--prefix , .edit-service-number-rule__input--reset{
+    margin-top: 10px;
+}
+
+.edit-service-number-rule__input--from-to input, .edit-service-number-rule__input--prefix input{
+    width: 61px;
+    height: 30px;
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
+    outline: none;
+}

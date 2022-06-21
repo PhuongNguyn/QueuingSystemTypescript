@@ -1,0 +1,68 @@
+.role-page{
+    padding-right: 104px;
+}
+
+.role-page__input{
+    display: flex;
+    justify-content: end;
+}
+
+.role-page-input__keyword{
+    position: relative;
+}
+
+.role-page-input__keyword p{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+    text-align: start;
+}
+
+.role-page-input__keyword input{
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    width: 240px;
+    height: 44px;
+    padding: 10px 50px 10px 12px;
+    gap: 10px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #A9A9B0;
+    outline: none;
+}
+
+.role-page-input__keyword--search-icon{
+    position: absolute;
+    color: #FF7506;
+    top:35px;
+    right: 15px;
+}
+
+.role-page__table{
+    margin-top: 12px;
+}
+
+.role-page__dividePage{
+    margin-right: 0px;
+}
+
+.role-page__table tr td span{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    text-decoration-line: underline;
+    color: #4277FF;
+    cursor: pointer;
+}
+
+.role__create{
+    top: 222px;
+    width: 80px;
+}
+.role__create p{
+    
+}

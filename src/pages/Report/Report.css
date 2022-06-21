@@ -1,0 +1,140 @@
+.report-page-calendar{
+    width: 290px;
+}
+
+.report-page__input-date{
+    margin-top: 104px;
+    margin-left: 0px;
+}
+
+.report-page-input__date-from, .report-page-input__date-to{
+    width: 135px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+}
+
+.report-page__table{
+    margin-top: 16px;
+    filter: drop-shadow(2px 2px 8px rgba(232, 239, 244, 0.8));
+    border-radius: 12px;
+}
+
+.report-page__list-table table{
+    width: 1112px;
+}
+
+.report-page__list-table{
+    height: 540px!important;
+    max-height: 540px;
+}
+
+.report-page__list-table tr{
+    height: 47px;
+    position: relative;
+}
+
+.report-page__list-table tr:first-child td{
+    height: 47px;
+    padding: 0px 16px;
+    position: relative;
+}
+
+.report-page__list-table tr:first-child td p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.report-page__list-table tr td{
+    padding: 0 14px;
+}
+
+.report__download{
+    top: 195px;
+    height: 80px;
+}
+
+.report-page-list-table__option{
+    position: absolute;
+}
+
+.report-page-list-table__count-option, .report-page-list-table__service-option, .report-page-list-table__grant-time-option,
+.report-page-list-table__status-option, .report-page-list-table__source-option{
+    position: absolute;
+    width: 220px;
+    height: 198px;
+    padding: 8px 0px;
+    gap: 2px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-radius: 8px;
+    z-index: 1;
+    left: 0;
+    top: 48px;
+    overflow-y: scroll;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.report-page-list-table__service-option{
+    width: 228px;
+}
+
+.report-page-list-table__grant-time-option{
+    width: 234px;
+}
+.report-page-list-table__status-option{
+    width: 212px;
+}
+
+.report-page-list-table__source-option{
+    width: 202px;
+    height: 152px;
+}
+
+.report-page-list-table__count-option::-webkit-scrollbar, .report-page-list-table__service-option::-webkit-scrollbar,
+.report-page-list-table__grant-time-option::-webkit-scrollbar,.report-page-list-table__status-option::-webkit-scrollbar,
+.report-page-list-table__source-option::-webkit-scrollbar{
+    display: none;
+}
+
+.report-page-list-table__count-option ul, .report-page-list-table__service-option ul, 
+.report-page-list-table__grant-time-option ul, .report-page-list-table__status-option ul, 
+.report-page-list-table__source-option ul{
+    list-style: none;
+    
+}
+
+.report-page-list-table__count-option ul li, .report-page-list-table__service-option ul li,
+.report-page-list-table__grant-time-option ul li, .report-page-list-table__status-option ul li,
+.report-page-list-table__source-option ul li{
+    padding: 10px 12px;
+    gap: 24px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #282739;
+    text-align: start;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 44px;
+}
+
+.report-page-list-table__service-option ul li p{
+    display: flex;
+    align-items: center;
+}
+
+.report-page-list-table__count-option ul li:hover, .report-page-list-table__grant-time-option ul li:hover, 
+.report-page-list-table__status-option ul li:hover, .report-page-list-table__source-option ul li:hover{
+    background: #FFF2E7;
+}
+
+.report-page--option-scrollbar{
+    position: absolute;
+    width: 4px;
+    height: 64px;
+    top: 100px;
+    right: 4px;
+    background: #FFC89B;
+    border-radius: 43px;
+    z-index: 2;
+}

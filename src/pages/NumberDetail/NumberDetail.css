@@ -1,0 +1,40 @@
+.number-detail__box{
+    margin-top: 24px;
+}
+
+.number-detail-box__content p{
+    color: #282739;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;
+    margin-top: 16px;
+}
+
+.number-detail-box__content p:first-child{
+    margin-top: 24px;
+}
+
+.number-detail-box__content span{
+    color: #535261;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.number-detail-box__content{
+    display: flex;
+}
+
+.number-detail-box-content__column2{
+    margin-left: 300px;
+}
+
+.number-detail{
+    width: 1000px;
+}
+
+.number-detail__back{
+    height: 75px;
+}

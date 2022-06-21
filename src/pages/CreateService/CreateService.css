@@ -1,0 +1,87 @@
+.create-service__input{
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+}
+
+.create-service__box {
+    width: 1192px!important;
+}
+
+
+.create-service-input__service-code p, .create-service-input__service-name p, .create-service-input__service-description p{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;
+    color: #282739;
+}
+
+.create-service-input__service-name {
+    margin-top: 12px;
+}
+
+.create-service-input__service-code input, .create-service-input__service-name input, .create-service-input__service-description input{
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    width: 540px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #535261;
+    box-sizing: border-box;
+    margin-top: 4px;
+    outline: none;
+}
+
+.create-service-input__service-description textarea{
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    width: 540px;
+    height: 128px;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #535261;
+    box-sizing: border-box;
+    margin-top: 4px;
+    outline: none;
+}
+
+.create-service__number--title{
+    margin-top: 12px;
+}
+
+.create-service-number-rule__input--from-to p, .create-service-number-rule__input--prefix p, .create-service-number-rule__input--reset p{
+    color: #282739;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;
+}
+
+.create-service-number-rule__input--from-to , .create-service-number-rule__input--prefix , .create-service-number-rule__input--reset{
+    margin-top: 10px;
+}
+
+.create-service-number-rule__input--from-to input, .create-service-number-rule__input--prefix input{
+    width: 61px;
+    height: 30px;
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
+    outline: none;
+}

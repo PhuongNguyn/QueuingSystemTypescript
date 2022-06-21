@@ -1,0 +1,309 @@
+.service-detail__box{
+    width: 1112px;
+    height: 550px;
+    margin-top: 16px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.service-detail-box__information{
+    background: #FFFFFF;
+    box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
+    border-radius: 12px;
+    width: 350px;
+    height: 606px;
+    padding: 16px 24px;
+    box-sizing: border-box;
+}
+
+.service__edit{
+    padding: 12px 4px;
+    gap: 4px;
+    position: absolute;
+    width: 80px;
+    height: 94px;
+    right: 0;
+    top: 155px;
+    background: #FFF2E7;
+    box-shadow: 0px 0px 6px #E7E9F2;
+    border-radius: 8px 0px 0px 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.service__edit p, .service__back p{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #FF7506;
+    width: 60px;
+    margin: 0 auto;
+    width: 72px;
+    height: 38px;
+}
+
+.service-detail-box__table{
+    width: 680px;
+    height: 606px;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
+    border-radius: 12px;
+    margin-left: 24px;
+    padding: 16px 24px;
+
+}
+
+.service__back{
+    padding: 12px 4px;
+    gap: 4px;
+    position: absolute;
+    width: 80px;
+    height: 75px;
+    right: 0;
+    top: 245px;
+    background: #FFF2E7;
+    box-shadow: 0px 0px 6px #E7E9F2;
+    border-radius: 8px 0px 0px 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.service-detail-box__information--content p{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+    text-align: start;
+    margin-top: 12px;
+}
+
+.service-detail-box__information--content span{
+    color: #535261;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.service-detail__box--title-number{
+    margin-top: 16px;
+}
+
+.service-detail-number-rule__input--from-to p, .service-detail-number-rule__input--prefix p, .service-detail-number-rule__input--reset p{ 
+    color: #282739;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;
+}
+
+.service-detail-number-rule__input--from-to, .service-detail-number-rule__input--prefix, .service-detail-number-rule__input--reset{ 
+    margin-top: 15px;
+}
+
+.service-detail-number-rule__input input{
+    width: 61px;
+    height: 40px;
+    padding: 10px 12px 10px 12px;
+    gap: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    outline: none;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.service-detail-number-rule__input--example{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+    text-align: start;
+    margin-top: 12px;
+}
+
+.service-detail-box-table__input{
+    display: flex;
+}
+
+.service-detail-box-table__input--status p, .service-detail-box-table__input--from--title, .service-detail-box-table__input--keyword p{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #282739;
+    text-align: start;
+}
+
+.service-detail-box-table__input-status--option{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 24px;
+    width: 160px;
+    height: 44.15px;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #535261;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.service-detail-box-table__input-status--option p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #535261;
+}
+
+.service-detail-box-table__input--from{
+    margin-left: 12px;
+}
+
+.service-detail-box-table__input--keyword {
+    position:relative;
+    margin-left: 12px;
+}
+
+.service-detail-box-table__input--keyword input{
+    width: 224px;
+    height: 44.15px;
+    padding: 10px 16px 10px 12px;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1.5px solid #D4D4D7;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #A9A9B0;
+    box-sizing: border-box;
+    margin-top: 4px;
+    outline: none;
+}
+
+.service-detail-box-table__input--keyword-icon{
+    color: #FF7506;
+    position: absolute;
+    top: 39px;
+    right: 10px;
+}
+
+.service-detail-box-table__table{
+    width: 690px;
+    height: 460px;
+    border-radius: 12px;
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.service-detail-box-table__table table{
+    width: 690px;
+}
+
+.service-detail-box-table__table table tr:first-child{
+    background-color: #FF9138!important;
+}
+
+.service-detail-box-table__table table tr{
+    height: 49px;
+}
+
+.service-detail-box-table__table table tr:first-child td{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    text-align: start;
+    padding: 12px 17px;
+    box-sizing: border-box;
+}
+
+.service-detail-box-table__table table tr td{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #535261;
+    text-align: start;
+    padding: 12px 17px;
+    box-sizing: border-box;
+}
+
+.service-detail-box-table__table tr:first-child td:first-child{
+    border-top-left-radius: 12px;
+} 
+
+.service-detail-box-table__table tr:last-child td:first-child{
+    border-bottom-left-radius: 12px;
+}
+
+.service-detail-box-table__table tr:last-child td:last-child{
+    border-bottom-right-radius: 12px;
+}
+
+.service-detail-box-table__table tr:first-child td:last-child{
+    border-top-right-radius: 12px;
+}
+
+.service-detail-box-table__table table tr:nth-child(odd){
+    background-color: #FFF2E7;
+}
+
+.service-detail__devide-page{
+    margin-top: 16px;
+}
+.service-detail-box-table-status__option{
+    position: absolute;
+    z-index: 1;
+    left: -1px;
+    top: 43px;
+}
+
+.service-detail-box-table__input-status--option{
+    position: relative;
+}
+
+.service-detail-box-table-status__option ul{
+    list-style-type: none;
+    width: 160px;
+    height: 175px;
+    background-color: white;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 8px 0px;
+    gap: 2px;
+
+}
+
+.service-detail-box-table-status__option ul li{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #535261;
+    padding: 10px 12px;
+    text-align: start;
+}
+
+.service-detail-box-table-status__option ul li:hover{
+    background-color:#FFF2E7;
+}
+
+.service-detail__devide-page{
+    margin-right: 0px;
+}
+
+.service__calendar{
+    width: 310px;
+    background-color: white;
+}
