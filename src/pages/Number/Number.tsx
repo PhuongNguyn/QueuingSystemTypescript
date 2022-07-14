@@ -1,6 +1,6 @@
 import './Number.css'
-import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai'
-import { useState } from 'react'
+import { AiFillCaretDown, AiFillCaretUp, AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
+import { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { BsFillCaretRightFill } from 'react-icons/bs'
@@ -8,6 +8,10 @@ import { BiSearch } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import { BsFillPlusSquareFill } from 'react-icons/bs'
 import { BsDot } from 'react-icons/bs'
+import { useDispatch } from 'react-redux'
+import { getNumbers } from '../../redux/action/number'
+import { useSelector } from 'react-redux'
+import numberSelector from '../../redux/selector/numberSelector'
 
 const Number:React.FC = () => {
     interface IData {
@@ -20,19 +24,22 @@ const Number:React.FC = () => {
         source: string,
     }
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [toggleServiceName, setToggleServiceName] = useState<boolean>(false)
     const [serviceName, setServiceName] = useState<string>('all')
     const [toggleStatus, setToggleStatus] = useState<boolean>(false)
     const [status, setStatus] = useState<string>('all')
     const [toggleSource, setToggleSource] = useState<boolean>(false)
     const [source, setSource] = useState<string>('all')
-    const [timeFrom, setTimeFrom] = useState<string>('1/1/2022')
-    const [timeTo, setTimeTo] = useState<string>('1/1/2022')
+    const [timeFrom, setTimeFrom] = useState<string>('1/1/1999')
+    const [timeTo, setTimeTo] = useState<string>('1/1/1999')
     const [toggleTimeFrom , setToggleTimeFrom] = useState<boolean>(false)
     const [toggleTimeTo , setToggleTimeTo] = useState<boolean>(false)
+    const [keyword, setKeyword] = useState('')
     const handleToggleCalendarFrom: () => void = () =>{
         setToggleTimeFrom(!toggleTimeFrom)
     }
+    const [currentPage, setCurrentPage] = useState<number>(1)
 
     const handleToggleCalendarTo: () => void = () =>{
         setToggleTimeTo(!toggleTimeTo)
@@ -40,11 +47,11 @@ const Number:React.FC = () => {
 
     const handleChangeValueFrom: (value: string) => void = (value:string)=>{
         const date = new Date(value)
-        setTimeFrom(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`)
+        setTimeFrom(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`)
     }
     const handleChangeValueTo: (value: string) => void = (value: string) =>{
         const date = new Date(value)
-        setTimeTo(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`)
+        setTimeTo(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`)
     }
 
     const handleDetailClick: () => void = ()=>{
@@ -54,7 +61,11 @@ const Number:React.FC = () => {
 
     const serviceNameKey:{[key: string]: string} = {
         'all': 'Tất cả',
-        'heart': 'Khám tim mạch',
+        'heart': 'Khám tim',
+        'eyes': 'Khám mắt',
+        'general': 'Khám tổng quát',
+        'earnose': 'Khám tai mũi họng',
+        'internal': 'Khám nội',
     }
 
     const statusName:{[key: string]: string} = {
@@ -69,91 +80,35 @@ const Number:React.FC = () => {
         'kiosk': 'Kiosk',
         'system': 'Hệ thống',
     }
+    let numbers:any = useSelector((state:any)=>state.number.numbers)
+    numbers = numberSelector(serviceName, status, source, timeFrom, timeTo, keyword,numbers)
+    const pagesLength:number = numbers.length % 9 == 0 ? numbers.length / 9 : numbers.length / 9 + 1
+    let pages:number[] = []
+    for(let i:number = 1; i <= pagesLength; i++){
+        pages.push(i)
+    }
+
+    const handleLeftPageClick:(e:React.SyntheticEvent)=>void = (e:React.SyntheticEvent) =>{
+        if(currentPage == 1){
+            e.preventDefault()
+        }else{
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleRightPageClick:(e:React.SyntheticEvent)=>void = (e:React.SyntheticEvent) =>{
+        if(currentPage == pages[pages.length - 1]){
+            e.preventDefault()
+        }else{
+            setCurrentPage(currentPage + 1)
+        }
+    }
 
 
-    const data:IData[] = [
-        {
-            count: '2010001',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010002',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010003',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'used',
-            source: 'kiosk',
-        },
-        {
-            count: '2010004',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'skip',
-            source: 'kiosk',
-        },
-        {
-            count: '2010005',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010006',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010007',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010008',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010008',
-            name: 'Lê Huỳnh Ái Vân',
-            service: 'heart',
-            grantTime: '14:35 - 7/11/2021',
-            expiry: '14:35 - 12/11/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-    ]
+    useEffect(()=>{
+        dispatch(getNumbers())
+    },[])
+    
     return (
         <div className = "number-page page-css">
             <h1 className = "page--title">Quản lý cấp số</h1>
@@ -167,12 +122,12 @@ const Number:React.FC = () => {
                     </div>
                     {toggleServiceName && <div className = "number-page-input__service-name--option">
                         <ul>
-                            <li>Tất cả</li>
-                            <li>Phụ khoa</li>
-                            <li>Khám sản - Phụ khoa</li>
-                            <li>Khám răng hàm mặt</li>
-                            <li>Khám tai mũi họng</li>
-                            <li>Khám mắt</li>
+                            <li onClick = {()=>setServiceName('all')}>Tất cả</li>
+                            <li onClick = {()=>setServiceName('heart')}>Khám tim</li>
+                            <li onClick = {()=>setServiceName('pregnance')}>Khám sản - Phụ khoa</li>
+                            <li onClick = {()=>setServiceName('teeth')}>Khám răng hàm mặt</li>
+                            <li onClick = {()=>setServiceName('earnose')}>Khám tai mũi họng</li>
+                            <li onClick = {()=>setServiceName('eyes')}>Khám mắt</li>
                         </ul>
                     </div>}
                     {toggleServiceName && <div className = "number-page-input__service-name--scrollbar">
@@ -187,10 +142,10 @@ const Number:React.FC = () => {
                         {toggleStatus && <AiFillCaretUp  style = {{color: '#FF7506'}}/>}
                         {toggleStatus && <div className = "number-page__input__status--option">
                             <ul>
-                                <li>Tất cả</li>
-                                <li>Đang chờ</li>
-                                <li>Đã sử dụng</li>
-                                <li>Bỏ qua</li>
+                                <li onClick = {()=>setStatus('all')}>Tất cả</li>
+                                <li onClick = {()=>setStatus('waiting')}>Đang chờ</li>
+                                <li onClick = {()=>setStatus('used')}>Đã sử dụng</li>
+                                <li onClick = {()=>setStatus('skip')}>Bỏ qua</li>
                             </ul>
                         </div>}
                     </div>
@@ -203,9 +158,9 @@ const Number:React.FC = () => {
                         {toggleSource && <AiFillCaretUp  style = {{color: '#FF7506'}}/>}
                         {toggleSource && <div className = "number-page__input__source--option">
                             <ul>
-                                <li>Tất cả</li>
-                                <li>Kiosk</li>
-                                <li>Hệ thống</li>
+                                <li onClick = {()=>setSource('all')}>Tất cả</li>
+                                <li onClick = {()=>setSource('kiosk')}>Kiosk</li>
+                                <li onClick = {()=>setSource('system')}>Hệ thống</li>
                             </ul>
                         </div>}
                     </div>
@@ -238,7 +193,7 @@ const Number:React.FC = () => {
                 </div>
                 <div className = "number-page-input__keyword">
                     <p>Từ khoá:</p>
-                    <input type = "text" placeholder='Nhập từ khoá'/>
+                    <input onChange = {(e)=>setKeyword(e.target.value)} value = {keyword} type = "text" placeholder='Nhập từ khoá'/>
                     <BiSearch size = {22} className = "number-page-input__keyword--search-icon"/>
                 </div>
             </div>
@@ -255,7 +210,7 @@ const Number:React.FC = () => {
                             <td width={122}>Nguồn cấp</td>
                             <td width={99}></td>
                         </tr>
-                        {data.map((item) => {
+                        {numbers.slice((currentPage - 1) * 9, currentPage * 9).map((item:any) => {
                             let dotColor = '#4277FF'
                             if(item.status == 'waiting')
                                 dotColor = '#4277FF'
@@ -264,18 +219,27 @@ const Number:React.FC = () => {
                             else if(item.status == 'skip')
                                 dotColor = '#E73F3F'
                             return (<tr>
-                                <td width = {94}>{item.count}</td>
-                                <td width={164}>{item.name}</td>
-                                <td width={173}>{`${serviceNameKey[item.service]}`}</td>
-                                <td width={163}>{item.grantTime}</td>
-                                <td width={176}>{item.expiry}</td>
+                                <td width = {94}>{item.no}</td>
+                                <td width={164}>{item.customerName}</td>
+                                <td width={173}>{`${serviceNameKey[item.serviceCode]}`}</td>
+                                <td width={163}>{item.orderTime}</td>
+                                <td width={176}>{item.expireTime}</td>
                                 <td style={{textAlign: 'start', padding: '0px 4px', boxSizing:'border-box'}} width = {149}><BsDot size = {30} style = {{verticalAlign: '-10px', color: dotColor}}/>{`${statusName[item.status]}`}</td>
-                                <td width={122}>{`${sourceName[item.source]}`}</td>
+                                <td width={122}>{item.source}</td>
                                 <td width={99}><span onClick = {()=>handleDetailClick()} className = "number-table--update">Chi tiết</span></td>
                             </tr>)
                         }
                         )}
                     </table>
+                </div>
+                <div className = "number-dividePage dividePage">
+                    <ul>
+                        <li onClick = {(e)=>handleLeftPageClick(e)}><AiOutlineCaretLeft style = {{verticalAlign: '-2.5px'}}/></li>
+                        {pages.map((page)=>
+                            <li onClick = {()=>setCurrentPage(page)} style = {currentPage == page ? {backgroundColor: '#FF7506', color: 'white'}: {}}>{page}</li>
+                        )}
+                        <li onClick = {(e)=>handleRightPageClick(e)}><AiOutlineCaretRight style = {{verticalAlign: '-2.5px'}}/></li>
+                    </ul>
                 </div>
             </div>
             <div className = "equipment__create" onClick = {()=>navigate('createNumber')}>

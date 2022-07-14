@@ -8,10 +8,17 @@ import {FiLayers, FiLogOut} from 'react-icons/fi'
 import {RiSettingsLine} from 'react-icons/ri'
 import {HiOutlineDocumentReport} from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { logOut } from '../../redux/action/user'
 
 const Navbar:React.FC = () =>{
+    const dispatch:Dispatch = useDispatch()
     const navigate = useNavigate()
     const isLogin:boolean = true
+    const handleLogoutClick:() => void = ()=>{
+        dispatch(logOut(navigate))
+    }
     return (
         <div className = "navbar">
             <img className = "navbar--logo" src='/images/Logo-alta.png' alt = "logo-alta"/>
@@ -39,7 +46,7 @@ const Navbar:React.FC = () =>{
                     </li>}
                 </ul>
             </div>
-            {isLogin && <div className='navbar__button-logout' onClick = {()=>navigate('/login')}>
+            {isLogin && <div className='navbar__button-logout' onClick = {handleLogoutClick}>
                 <span><FiLogOut size = {20} style = {{verticalAlign: '-4px', marginRight: '6px'}}/> Đăng xuất</span>
             </div>}
         </div>

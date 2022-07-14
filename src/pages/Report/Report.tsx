@@ -1,5 +1,5 @@
 import './Report.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { BsDot, BsFillCaretRightFill } from 'react-icons/bs'
@@ -8,6 +8,9 @@ import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import {FaFileDownload} from 'react-icons/fa'
 import { Checkbox } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { getNumbers } from '../../redux/action/number'
+import { useSelector } from 'react-redux'
 
 const Report:React.FC = () =>{
     interface IData{
@@ -17,6 +20,7 @@ const Report:React.FC = () =>{
         status: string,
         source: string,
     }
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [countOption, setCountOption] = useState<boolean>(false)
     const [serviceOption, setServiceOption] = useState<boolean>(false)
@@ -27,6 +31,7 @@ const Report:React.FC = () =>{
     const [timeTo, setTimeTo] = useState<string>('1/1/2022')
     const [calendarFrom, setCalendarFrom] = useState<boolean>(false)
     const [calendarTo, setCalendarTo] = useState<boolean>(false)
+    const [currentPage, setCurrentPage] = useState(1)
     const handleChangeValueFrom:(vaule: string) => void = (value:string)=>{
         const date = new Date(value)
         setTimeFrom(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`)
@@ -42,9 +47,13 @@ const Report:React.FC = () =>{
         setCalendarTo(!calendarTo)
     }
 
-    const serviceNameKey:{[key:string]:string} = {
+    const serviceNameKey:{[key: string]: string} = {
         'all': 'Tất cả',
-        'heart': 'Khám tim mạch',
+        'heart': 'Khám tim',
+        'eyes': 'Khám mắt',
+        'general': 'Khám tổng quát',
+        'earnose': 'Khám tai mũi họng',
+        'internal': 'Khám nội',
     }
 
     const statusName:{[key:string]:string} = {
@@ -59,79 +68,33 @@ const Report:React.FC = () =>{
         'kiosk': 'Kiosk',
         'system': 'Hệ thống',
     }
+    
+    let numbers:any = useSelector((state:any)=>state.number.numbers)
+    const pagesLength:number = numbers.length % 10 == 0 ? numbers.length / 10 : numbers.length / 10 + 1
+    let pages:number[] = []
+    for(let i:number = 1; i <= pagesLength; i++){
+        pages.push(i)
+    }
 
-    const data:IData[] = [
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-        {
-            count: '2010001',
-            service: 'heart',
-            grantTime: '07:20 - 07/10/2021',
-            status: 'waiting',
-            source: 'kiosk',
-        },
-    ]
+    const handleLeftPageClick:(e:React.SyntheticEvent)=>void = (e:React.SyntheticEvent) =>{
+        if(currentPage == 1){
+            e.preventDefault()
+        }else{
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleRightPageClick:(e:React.SyntheticEvent)=>void = (e:React.SyntheticEvent) =>{
+        if(currentPage == pages[pages.length - 1]){
+            e.preventDefault()
+        }else{
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
+    useEffect(()=>{
+        dispatch(getNumbers())
+    },[])
     return (
             <div className = 'report-page page-css'>
               <div className = "service-input__date report-page__input-date">
@@ -230,7 +193,7 @@ const Report:React.FC = () =>{
                                     </div>}
                                 </td>
                             </tr>
-                            {data.map((item) => {
+                            {numbers.slice((currentPage - 1) * 10, currentPage * 10).map((item:any) => {
                                  let dotColor = '#4277FF'
                                  if(item.status == 'waiting')
                                      dotColor = '#4277FF'
@@ -240,11 +203,11 @@ const Report:React.FC = () =>{
                                      dotColor = '#E73F3F'
                                 return (
                                     <tr>
-                                        <td width={227}>{item.count}</td>
-                                        <td width={234}>{`${serviceNameKey[item.service]}`}</td>
-                                        <td width={240}>{item.grantTime}</td>
+                                        <td width={227}>{item.no}</td>
+                                        <td width={234}>{`${serviceNameKey[item.serviceCode]}`}</td>
+                                        <td width={240}>{item.orderTime}</td>
                                         <td width={218}><BsDot size = {30} style = {{color: dotColor, verticalAlign: '-10px'}}/>{`${statusName[item.status]}`}</td>
-                                        <td width={207}>{`${sourceName[item.source]}`}</td>
+                                        <td width={207}>{item.source}</td>
                                     </tr>
                                 )
                             })}
@@ -253,15 +216,11 @@ const Report:React.FC = () =>{
                 </div>
                 <div className = "dividePage">
                     <ul>
-                        <li><AiOutlineCaretLeft style = {{verticalAlign: '-2.5px'}}/></li>
-                        <li style = {{backgroundColor: '#FF7506', color: 'white'}}>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>...</li>
-                        <li>10</li>
-                        <li><AiOutlineCaretRight style = {{verticalAlign: '-2.5px'}}/></li>
+                        <li onClick = {(e)=>handleLeftPageClick(e)}><AiOutlineCaretLeft style = {{verticalAlign: '-2.5px'}}/></li>
+                        {pages.map((page)=>
+                            <li onClick = {()=>setCurrentPage(page)} style = {currentPage == page ? {backgroundColor: '#FF7506', color: 'white'}: {}}>{page}</li>
+                        )}
+                        <li onClick = {(e)=>handleRightPageClick(e)}><AiOutlineCaretRight style = {{verticalAlign: '-2.5px'}}/></li>
                     </ul>
                 </div>
                 <div className = "equipment__create report__download">

@@ -29,10 +29,31 @@ import CreateAccount from './pages/CreateAccount/CreateAccount';
 import EditAccount from './pages/EditAccount/EditAccount';
 import UserDiary from './pages/UserDiary/UserDiary';
 import UserInfo from './pages/UserInfo/UserInfo'
+import LoadingBar from 'react-redux-loading-bar'
+import { useEffect } from 'react';
+import { auth } from './firebase/config';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function App() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  
   const createNumberCard:boolean = useSelector((state:any) => state.number.createCard)
+  useEffect(()=>{
+    auth.onAuthStateChanged(async (user) =>{
+      if(!user){
+        console.log('User is not logged in')
+        navigate('/login')
+        return;
+      }
+      if(location.pathname.split('/')[1] == 'login'){
+        navigate('/')
+      }
+    })
+  },[])
   return (
     <div className="App">
+      <LoadingBar style={{ backgroundColor: '#FF7506', height: '2px', position: 'fixed', top: '0', zIndex: '50' }}/>
       {createNumberCard && <CreateCard/>}
        <Routes>
             <Route path = "/" element ={<MainLayout/>}>

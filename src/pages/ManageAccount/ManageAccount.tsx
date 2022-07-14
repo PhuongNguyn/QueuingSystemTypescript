@@ -1,106 +1,63 @@
 import './ManageAccount.css'
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { BsDot } from 'react-icons/bs'
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { BsFillPlusSquareFill } from 'react-icons/bs'
+import IAccount from '../../interfaces/account'
+import { useDispatch } from 'react-redux'
+import { getAccounts } from '../../redux/action/account'
+import { useSelector } from 'react-redux'
+import accountSelector from '../../redux/selector/accountSelector'
+import { getRole } from '../../redux/action/role'
+import IRole from '../../interfaces/roles'
 
 const ManageAccount:React.FC = () =>{
-    interface IData{
-        account: string,
-        name: string,
-        phone: string,
-        email: string,
-        role: string,
-        status: string,
-    }
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [roleOption, setRoleOption] = useState<boolean>(false)
-    const data:IData[] = [
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-        {
-            account: 'tuyetnguyen@18',
-            name: 'Nguyễn Văn A',
-            phone: '0919256712',
-            email: 'tuyetnguyen123@gmail.com',
-            role: 'Kế toán',
-            status: 'active',
-        },
-    ]
-
-    const statusName:{[key:string]: string} = {
-        'active': 'Hoạt động',
-        'nonactive': 'Ngưng hoạt động',
+    const [role, setRole] = useState<string>('all')
+    const [keyword, setKeyword] = useState<string>('')
+    const [currentPage, setCurrentPage] = useState<number>(1)
+   
+    const statusName:{[key:string]:string} = {
+        'active':'Hoạt động',
+        'nonactive':'Ngưng hoạt động'
     }
 
     const handleUpdateClick:()=>void = ()=>{
         navigate('editAccount')
     }
+
+    const handleLeftPageClick:(e:React.SyntheticEvent)=>void = (e:React.SyntheticEvent) =>{
+        if(currentPage == 1){
+            e.preventDefault()
+        }else{
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleRightPageClick:(e:React.SyntheticEvent)=>void = (e:React.SyntheticEvent) =>{
+        if(currentPage == pages[pages.length - 1]){
+            e.preventDefault()
+        }else{
+            setCurrentPage(currentPage + 1)
+        }
+    }
+    let accounts:IAccount[] = useSelector((state:any) => state.account)
+    let roles:IRole[] = useSelector((state:any) => state.role) 
+    accounts = accountSelector(role, keyword, accounts)
+    const pagesLength:number = accounts.length % 9 == 0 ? accounts.length / 9 : accounts.length / 9 + 1
+    let pages:number[] = []
+    for(let i:number = 1; i <= pagesLength; i++){
+        pages.push(i)
+    }
+    useEffect(()=>{
+        dispatch(getRole())
+        dispatch(getAccounts())
+    },[])
     return (
         <div className='account-page page-css'>
             <h1 className = 'account-page--title page--title'>Danh sách tài khoản</h1>
@@ -108,21 +65,22 @@ const ManageAccount:React.FC = () =>{
                 <div className = 'account-page-input__role'>
                     <p>Tên vai trò</p>
                     <div className = 'account-page-input__role--input' onClick = {()=>setRoleOption(!roleOption)}>
-                        <p>Tất cả</p>
+                        {role != 'all'?<p>{(roles.map((item)=> item.code == role?item.name: ''))}</p>:<p>Tất cả</p>}
                         {!roleOption && <AiFillCaretDown style = {{color: '#FF7506'}}/>}
                         { roleOption &&<AiFillCaretUp style = {{color: '#FF7506'}}/>}
                         {roleOption && <div className = 'account-page-input__role--input-option'>
                             <ul>
-                                <li>Tất cả</li>
-                                <li>Hoạt động</li>
-                                <li>Ngưng Hoạt động</li>
+                                <li onClick = {()=>setRole('all')}>Tất cả</li>
+                                {
+                                    roles.map((item) => <li onClick = {()=>setRole(item.code)}>{item.name}</li>)
+                                }
                             </ul>
                         </div>}
                     </div>
                 </div>
                 <div className = 'account-page-input__keyword'>
                     <p>Từ khoá</p>
-                    <input type = 'text' placeholder='Nhập từ khoá'/>
+                    <input value = {keyword} onChange = {(e)=>setKeyword(e.target.value)} type = 'text' placeholder='Nhập từ khoá'/>
                     <BiSearch className = 'account-page-input__keyword-search-icon' size = {23} style = {{color: '#FF7506'}}/>
                 </div>
             </div>
@@ -138,13 +96,13 @@ const ManageAccount:React.FC = () =>{
                             <td width = {195}>Trạng thái hoạt động</td>
                             <td width = {110}></td>
                         </tr>
-                        {data.map((item) => 
+                        {accounts.slice((currentPage-1)*9, currentPage *9).map((item) => 
                             <tr>
-                                <td width = {150}>{item.account}</td>
+                                <td width = {150}>{item.username}</td>
                                 <td width = {168}>{item.name}</td>
                                 <td width = {132}>{item.phone}</td>
                                 <td width = {257}>{item.email}</td>
-                                <td width = {116}>{item.role}</td>
+                                <td width = {116}>{roles.map((role) => role.code == item.role ? role.name : '')}</td>
                                 <td width = {195}>
                                     <BsDot 
                                         size = {30} style = {item.status == 'active' ? {color: '#34CD26', verticalAlign: '-10px'} : {color: '#EC3740', verticalAlign: '10px'}}
@@ -158,15 +116,11 @@ const ManageAccount:React.FC = () =>{
             </div>
             <div className = "dividePage manage-account-divide-page">
                     <ul>
-                        <li><AiOutlineCaretLeft style = {{verticalAlign: '-2.5px'}}/></li>
-                        <li style = {{backgroundColor: '#FF7506', color: 'white'}}>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>...</li>
-                        <li>10</li>
-                        <li><AiOutlineCaretRight style = {{verticalAlign: '-2.5px'}}/></li>
+                        <li onClick = {(e)=>handleLeftPageClick(e)}><AiOutlineCaretLeft style = {{verticalAlign: '-2.5px'}}/></li>
+                        {pages.map((page)=>
+                            <li onClick = {()=>setCurrentPage(page)} style = {currentPage == page ? {backgroundColor: '#FF7506', color: 'white'}: {}}>{page}</li>
+                        )}
+                        <li onClick = {(e)=>handleRightPageClick(e)}><AiOutlineCaretRight style = {{verticalAlign: '-2.5px'}}/></li>
                     </ul>
             </div>
             <div className = "equipment__create" onClick = {()=>navigate('createAccount')}>

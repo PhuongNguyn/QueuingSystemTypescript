@@ -1,11 +1,24 @@
 import './Login.css'
 import { useState } from 'react'
 import {FiEyeOff, FiAlertCircle} from 'react-icons/fi'
+import { login } from '../../redux/action/user'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { NavigateFunction } from 'react-router-dom'
 
 const Login:React.FC = () =>{
+    const navigate:NavigateFunction = useNavigate()
+    const dispatch:Dispatch = useDispatch()
     const [passwordInputType, setPasswordInputType] = useState<string>('password')
-    const [err, setErr] = useState<string>('a')
-    let styleInputErr:{border: string} = err ? {border: '1.5px solid #E73F3F'} : {border: ''}
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const user = useSelector((state:any) => state.user)
+    let styleInputErr:{border: string} = user.message ? {border: '1.5px solid #E73F3F'} : {border: ''}
+    const handleLoginClick = () =>{
+        dispatch(login(email, password, navigate))
+    }
     return (
         <div className = "login-page">
             <div className = "login-page__banner">
@@ -17,17 +30,17 @@ const Login:React.FC = () =>{
                 <div className = "login-page__login-box">
                     <div className = "login-page__login-box-username">
                         <p className = "login-page__login-box--username-label">Tên đăng nhập *</p>
-                        <input style = {styleInputErr} className = "login-page__login-box-username-input" type = 'text' placeholder='Tên đăng nhập'/>
+                        <input value = {email} onChange = {(e)=>setEmail(e.target.value)} style = {styleInputErr} className = "login-page__login-box-username-input" type = 'email' placeholder='Tên đăng nhập'/>
                     </div>
                     <div className = "login-page__login-box-password">
                         <p className = "login-page__login-box--password-label">Mật khẩu *</p>
                         <FiEyeOff onClick = {()=> setPasswordInputType(passwordInputType === 'text' ? 'password' : 'text')} size = {17} className='login-page__login-box--password-show'/>
-                        <input style={styleInputErr} className = "login-page__login-box-password-input" type = {passwordInputType} placeholder='Mật khẩu'/>
+                        <input value={password} onChange = {(e)=>setPassword(e.target.value)} style={styleInputErr} className = "login-page__login-box-password-input" type = {passwordInputType} placeholder='Mật khẩu'/>
                     </div>
-                    <p className = "login-page__login-box--forgot-password">{err ? <FiAlertCircle size = {20}  style = {{verticalAlign: '-5px', color: '#e73f3f'}}/> : ''}{err? ' Sai tên đăng nhập hoặc mật khẩu' :'Quên mật khẩu?'}</p>
+                    <p className = "login-page__login-box--forgot-password">{user.message ? <FiAlertCircle size = {20}  style = {{verticalAlign: '-5px', color: '#e73f3f'}}/> : ''}{user.message? ' Sai tên đăng nhập hoặc mật khẩu' :'Quên mật khẩu?'}</p>
                 </div>
-                <button className = "login-page--sign-in-btn"><span>Đăng nhập</span></button>
-                {err && <p className = "login-page--forgot-password">Quên mật khẩu?</p>}
+                <button onClick = {()=>handleLoginClick()} className = "login-page--sign-in-btn"><span>Đăng nhập</span></button>
+                {user.message && <p className = "login-page--forgot-password">Quên mật khẩu?</p>}
             </div>
         </div>
     )

@@ -44,7 +44,7 @@
     position:absolute;
     left: 0;
     width: 300px;
-    height: 152px;
+    height: 143px;
     background: #FFFFFF;
     padding: 8px 0px;
     gap: 2px;
@@ -53,6 +53,11 @@
     box-sizing: border-box;
     top: 73px;
     z-index: 1;
+    overflow-y: scroll;
+}
+
+.account-page-input__role--input-option::-webkit-scrollbar{
+    display: none;
 }
 
 .account-page-input__role--input-option ul{
